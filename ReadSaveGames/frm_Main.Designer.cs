@@ -49,7 +49,7 @@
             // lbl_ubicacion
             // 
             this.lbl_ubicacion.AutoSize = true;
-            this.lbl_ubicacion.Location = new System.Drawing.Point(28, 30);
+            this.lbl_ubicacion.Location = new System.Drawing.Point(28, 15);
             this.lbl_ubicacion.Name = "lbl_ubicacion";
             this.lbl_ubicacion.Size = new System.Drawing.Size(46, 13);
             this.lbl_ubicacion.TabIndex = 0;
@@ -59,7 +59,7 @@
             // 
             this.txtb_rutaPartida.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtb_rutaPartida.Location = new System.Drawing.Point(80, 27);
+            this.txtb_rutaPartida.Location = new System.Drawing.Point(80, 12);
             this.txtb_rutaPartida.Name = "txtb_rutaPartida";
             this.txtb_rutaPartida.ReadOnly = true;
             this.txtb_rutaPartida.Size = new System.Drawing.Size(505, 20);
@@ -68,7 +68,7 @@
             // btn_cargarArchivo
             // 
             this.btn_cargarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cargarArchivo.Location = new System.Drawing.Point(591, 25);
+            this.btn_cargarArchivo.Location = new System.Drawing.Point(591, 10);
             this.btn_cargarArchivo.Name = "btn_cargarArchivo";
             this.btn_cargarArchivo.Size = new System.Drawing.Size(75, 23);
             this.btn_cargarArchivo.TabIndex = 2;
@@ -81,7 +81,7 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(31, 53);
+            this.splitContainer1.Location = new System.Drawing.Point(31, 39);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -91,25 +91,28 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rtbx_PartidaTexto);
-            this.splitContainer1.Size = new System.Drawing.Size(716, 464);
+            this.splitContainer1.Size = new System.Drawing.Size(716, 478);
             this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.TabIndex = 3;
             // 
             // rtbx_partidaBinario
             // 
             this.rtbx_partidaBinario.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbx_partidaBinario.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbx_partidaBinario.Location = new System.Drawing.Point(0, 0);
             this.rtbx_partidaBinario.Name = "rtbx_partidaBinario";
-            this.rtbx_partidaBinario.Size = new System.Drawing.Size(348, 464);
+            this.rtbx_partidaBinario.ReadOnly = true;
+            this.rtbx_partidaBinario.Size = new System.Drawing.Size(348, 478);
             this.rtbx_partidaBinario.TabIndex = 0;
             this.rtbx_partidaBinario.Text = "";
             // 
             // rtbx_PartidaTexto
             // 
             this.rtbx_PartidaTexto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbx_PartidaTexto.Font = new System.Drawing.Font("Courier New", 11.25F);
             this.rtbx_PartidaTexto.Location = new System.Drawing.Point(0, 0);
             this.rtbx_PartidaTexto.Name = "rtbx_PartidaTexto";
-            this.rtbx_PartidaTexto.Size = new System.Drawing.Size(364, 464);
+            this.rtbx_PartidaTexto.Size = new System.Drawing.Size(364, 478);
             this.rtbx_PartidaTexto.TabIndex = 0;
             this.rtbx_PartidaTexto.Text = "";
             // 
@@ -146,7 +149,7 @@
             // btn_convertir
             // 
             this.btn_convertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_convertir.Location = new System.Drawing.Point(672, 25);
+            this.btn_convertir.Location = new System.Drawing.Point(672, 10);
             this.btn_convertir.Name = "btn_convertir";
             this.btn_convertir.Size = new System.Drawing.Size(75, 23);
             this.btn_convertir.TabIndex = 7;

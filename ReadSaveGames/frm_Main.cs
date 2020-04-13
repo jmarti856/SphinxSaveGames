@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -43,6 +44,10 @@ namespace ReadSaveGames
 
         public void LeerPartida()
         {
+            //Crear e iniciar un cronometro.
+            Stopwatch Cronometro = new Stopwatch();
+            Cronometro.Start();
+
             //Crear lector.
             BinaryReaderBigEndian Lector = new BinaryReaderBigEndian(new FileStream(txtb_rutaPartida.Text, FileMode.Open, FileAccess.Read));
 
@@ -91,8 +96,12 @@ namespace ReadSaveGames
             //Cerrar el lector.
             Lector.Close();
 
+            //Parar cronometro.
+            Cronometro.Stop();
+
             //Mostrar numero de objectives.
             rtbx_partidaBinario.Text += "Hashcodes encontrados: " + ListaObjectivesEncontrados.Count + Environment.NewLine;
+            rtbx_partidaBinario.Text += "Tiempo transcurrido: " + Cronometro.Elapsed.TotalSeconds.ToString() + "s" + Environment.NewLine;
         }
 
         //Invertir el número.
