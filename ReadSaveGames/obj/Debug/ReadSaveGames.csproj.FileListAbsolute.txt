@@ -1,0 +1,10 @@
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.exe.config
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.exe
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.pdb
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csprojAssemblyReference.cache
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.Properties.Resources.resources
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.GenerateResource.cache
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.CoreCompileInputs.cache
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.exe
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.pdb
+C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.frm_Main.resources
