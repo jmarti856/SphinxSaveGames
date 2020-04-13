@@ -73,7 +73,7 @@ namespace ReadSaveGames
                 //
                 uint DatosLeidos = SwapBytes(Lector.ReadUInt32());
 
-                //Comprovar si lo que ha leido es un objective.
+                //Comprobar si lo que ha leido es un objective.
                 if (DatosLeidos.ToString("X4").StartsWith("42"))
                 {
                     EsHashcode = true;
@@ -205,6 +205,8 @@ namespace ReadSaveGames
         {
             if (sfd_save.ShowDialog() == DialogResult.OK)
             {
+                txbx_guardar.Text = Path.GetFullPath(sfd_save.FileName);
+
                 TextWriter tw = new StreamWriter(sfd_save.FileName);
 
                 foreach (string s in ArchivoFinal)
