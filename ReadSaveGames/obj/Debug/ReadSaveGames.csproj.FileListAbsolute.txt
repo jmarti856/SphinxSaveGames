@@ -8,3 +8,12 @@ C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\o
 C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.exe
 C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.pdb
 C:\Users\Jordi Martinez\Desktop\LeerPartidasSphinx\ReadSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.frm_Main.resources
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.exe.config
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.exe
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\bin\Debug\ReadSaveGames.pdb
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.frm_Main.resources
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.Properties.Resources.resources
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.GenerateResource.cache
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.CoreCompileInputs.cache
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.exe
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.pdb

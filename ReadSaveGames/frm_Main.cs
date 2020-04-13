@@ -12,18 +12,27 @@ namespace ReadSaveGames
             InitializeComponent();
         }
 
+        //Lista donde se guardaran los objectives.
         List<string> ListaObjectivesEncontrados = new List<string>();
 
         private void btn_cargarArchivo_Click(object sender, EventArgs e)
         {
+            //Array para dividir el ID objective y valor.
+            string[] Nombres;
+
             if (ofd_partida.ShowDialog() == DialogResult.OK)
             {
-                //Obtener la ruta al archivo de la partida guadada
+                //Obtener la ruta al archivo de la partida guadada.
                 txtb_rutaPartida.Text = ofd_partida.FileName;
 
+                //Vaciar la lista y el control del texto.
+                rtbx_partidaBinario.Clear();
+                ListaObjectivesEncontrados.Clear();
+
+                //Leer objectives y añadirlos a la lista.
                 LeerPartida();
 
-                string[] Nombres;
+                //Mostrar resultados busqueda
                 foreach(var item in ListaObjectivesEncontrados)
                 {
                     Nombres = item.Split(',');
@@ -34,60 +43,65 @@ namespace ReadSaveGames
 
         public void LeerPartida()
         {
+            //Crear lector.
             BinaryReaderBigEndian Lector = new BinaryReaderBigEndian(new FileStream(txtb_rutaPartida.Text, FileMode.Open, FileAccess.Read));
 
-            // Variables:
+            //Variables importantes.
             int NumeroObjectives = 1700;
-            int count = 0;
+            int Contador = 0;
             bool EsHashcode = false;
-            string NombreHashcode = null;
+            string NombreHashcode = "";
 
+            //Ir a la sección donde están los objectives.
             Lector.BaseStream.Seek(unchecked((int)0xEC), SeekOrigin.Begin);
 
-            while (count < NumeroObjectives)
+            //Buscar los 1700 objectives.
+            while (Contador < NumeroObjectives)
             {
-                uint y = SwapBytes(Lector.ReadUInt32());
+                //
+                uint DatosLeidos = SwapBytes(Lector.ReadUInt32());
 
-                if (y.ToString("X4").StartsWith("42"))
+                //Comprovar si lo que ha leido es un objective.
+                if (DatosLeidos.ToString("X4").StartsWith("42"))
                 {
                     EsHashcode = true;
-                    NombreHashcode = y.ToString("X4");
+                    NombreHashcode = DatosLeidos.ToString("X4");
                 }
                 else
                 {
+                    //Si lo que había leido es un objective lo añade a la lista junto con su valor.
                     if (EsHashcode)
                     {
-                        ListaObjectivesEncontrados.Add(NombreHashcode + "," + int.Parse(y.ToString("X4"), System.Globalization.NumberStyles.HexNumber));
+                        ListaObjectivesEncontrados.Add(NombreHashcode + "," + int.Parse(DatosLeidos.ToString("X4"), System.Globalization.NumberStyles.HexNumber));
                         EsHashcode = false;
                     }
                 }
 
-                if (y.ToString("X4").Equals("55555555"))
+                //Si son datos de relleno sale del bucle.
+                if (DatosLeidos.ToString("X4").Equals("55555555"))
                 {
                     break;
                 }
                 else
                 {
-                    count++;
+                    Contador++;
                 }
             }
+
+            //Cerrar el lector.
             Lector.Close();
 
+            //Mostrar numero de objectives.
             rtbx_partidaBinario.Text += "Hashcodes encontrados: " + ListaObjectivesEncontrados.Count + Environment.NewLine;
         }
+
+        //Invertir el número.
         public uint SwapBytes(uint x)
         {
             // swap adjacent 16-bit blocks
             x = (x >> 16) | (x << 16);
             // swap adjacent 8-bit blocks
             return ((x & 0xFF00FF00) >> 8) | ((x & 0x00FF00FF) << 8);
-        }
-
-        public static string InvertirString(string s)
-        {
-            char[] charArray = s.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
         }
     }
 }
