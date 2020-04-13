@@ -39,6 +39,7 @@
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_convertir = new System.Windows.Forms.Button();
             this.ofd_partida = new System.Windows.Forms.OpenFileDialog();
+            this.chbx_EuroLand = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,13 +62,13 @@
             this.txtb_rutaPartida.Location = new System.Drawing.Point(80, 27);
             this.txtb_rutaPartida.Name = "txtb_rutaPartida";
             this.txtb_rutaPartida.ReadOnly = true;
-            this.txtb_rutaPartida.Size = new System.Drawing.Size(443, 20);
+            this.txtb_rutaPartida.Size = new System.Drawing.Size(505, 20);
             this.txtb_rutaPartida.TabIndex = 1;
             // 
             // btn_cargarArchivo
             // 
             this.btn_cargarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cargarArchivo.Location = new System.Drawing.Point(529, 25);
+            this.btn_cargarArchivo.Location = new System.Drawing.Point(591, 25);
             this.btn_cargarArchivo.Name = "btn_cargarArchivo";
             this.btn_cargarArchivo.Size = new System.Drawing.Size(75, 23);
             this.btn_cargarArchivo.TabIndex = 2;
@@ -90,8 +91,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rtbx_PartidaTexto);
-            this.splitContainer1.Size = new System.Drawing.Size(654, 463);
-            this.splitContainer1.SplitterDistance = 318;
+            this.splitContainer1.Size = new System.Drawing.Size(716, 464);
+            this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.TabIndex = 3;
             // 
             // rtbx_partidaBinario
@@ -99,7 +100,7 @@
             this.rtbx_partidaBinario.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbx_partidaBinario.Location = new System.Drawing.Point(0, 0);
             this.rtbx_partidaBinario.Name = "rtbx_partidaBinario";
-            this.rtbx_partidaBinario.Size = new System.Drawing.Size(318, 463);
+            this.rtbx_partidaBinario.Size = new System.Drawing.Size(348, 464);
             this.rtbx_partidaBinario.TabIndex = 0;
             this.rtbx_partidaBinario.Text = "";
             // 
@@ -108,7 +109,7 @@
             this.rtbx_PartidaTexto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbx_PartidaTexto.Location = new System.Drawing.Point(0, 0);
             this.rtbx_PartidaTexto.Name = "rtbx_PartidaTexto";
-            this.rtbx_PartidaTexto.Size = new System.Drawing.Size(332, 463);
+            this.rtbx_PartidaTexto.Size = new System.Drawing.Size(364, 464);
             this.rtbx_PartidaTexto.TabIndex = 0;
             this.rtbx_PartidaTexto.Text = "";
             // 
@@ -116,7 +117,7 @@
             // 
             this.lbl_guardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_guardar.AutoSize = true;
-            this.lbl_guardar.Location = new System.Drawing.Point(28, 527);
+            this.lbl_guardar.Location = new System.Drawing.Point(28, 551);
             this.lbl_guardar.Name = "lbl_guardar";
             this.lbl_guardar.Size = new System.Drawing.Size(33, 13);
             this.lbl_guardar.TabIndex = 4;
@@ -126,16 +127,16 @@
             // 
             this.txbx_guardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbx_guardar.Location = new System.Drawing.Point(67, 524);
+            this.txbx_guardar.Location = new System.Drawing.Point(67, 548);
             this.txbx_guardar.Name = "txbx_guardar";
             this.txbx_guardar.ReadOnly = true;
-            this.txbx_guardar.Size = new System.Drawing.Size(537, 20);
+            this.txbx_guardar.Size = new System.Drawing.Size(599, 20);
             this.txbx_guardar.TabIndex = 5;
             // 
             // btn_guardar
             // 
             this.btn_guardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_guardar.Location = new System.Drawing.Point(610, 522);
+            this.btn_guardar.Location = new System.Drawing.Point(672, 546);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(75, 23);
             this.btn_guardar.TabIndex = 6;
@@ -145,7 +146,7 @@
             // btn_convertir
             // 
             this.btn_convertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_convertir.Location = new System.Drawing.Point(610, 25);
+            this.btn_convertir.Location = new System.Drawing.Point(672, 25);
             this.btn_convertir.Name = "btn_convertir";
             this.btn_convertir.Size = new System.Drawing.Size(75, 23);
             this.btn_convertir.TabIndex = 7;
@@ -156,11 +157,22 @@
             // 
             this.ofd_partida.FileName = "Buscar archivo";
             // 
-            // Form1
+            // chbx_EuroLand
+            // 
+            this.chbx_EuroLand.AutoSize = true;
+            this.chbx_EuroLand.Location = new System.Drawing.Point(634, 523);
+            this.chbx_EuroLand.Name = "chbx_EuroLand";
+            this.chbx_EuroLand.Size = new System.Drawing.Size(113, 17);
+            this.chbx_EuroLand.TabIndex = 8;
+            this.chbx_EuroLand.Text = "Formato EuroLand";
+            this.chbx_EuroLand.UseVisualStyleBackColor = true;
+            // 
+            // frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 557);
+            this.ClientSize = new System.Drawing.Size(769, 581);
+            this.Controls.Add(this.chbx_EuroLand);
             this.Controls.Add(this.btn_convertir);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.txbx_guardar);
@@ -169,7 +181,7 @@
             this.Controls.Add(this.btn_cargarArchivo);
             this.Controls.Add(this.txtb_rutaPartida);
             this.Controls.Add(this.lbl_ubicacion);
-            this.Name = "Form1";
+            this.Name = "frm_Main";
             this.Text = "Sphinx y la Maldita Momia";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -193,6 +205,7 @@
         private System.Windows.Forms.Button btn_guardar;
         private System.Windows.Forms.Button btn_convertir;
         private System.Windows.Forms.OpenFileDialog ofd_partida;
+        private System.Windows.Forms.CheckBox chbx_EuroLand;
     }
 }
 
