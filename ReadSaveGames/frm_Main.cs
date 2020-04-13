@@ -59,18 +59,20 @@ namespace ReadSaveGames
             BinaryReaderBigEndian Lector = new BinaryReaderBigEndian(new FileStream(txtb_rutaPartida.Text, FileMode.Open, FileAccess.Read));
 
             //Variables importantes.
-            int NumeroObjectives = 1700;
-            int Contador = 0;
+            int NumeroObjectives, Contador = 0;
             bool EsHashcode = false;
             string NombreHashcode = "";
 
             //Ir a la sección donde están los objectives.
             Lector.BaseStream.Seek(unchecked((int)0xEC), SeekOrigin.Begin);
 
-            //Buscar los 1700 objectives.
+            //Número de objectives que hay.
+            NumeroObjectives = checked((int)SwapBytes(Lector.ReadUInt32()));
+
+            //Buscar los objectives.
             while (Contador < NumeroObjectives)
             {
-                //
+                //Leer datos
                 uint DatosLeidos = SwapBytes(Lector.ReadUInt32());
 
                 //Comprobar si lo que ha leido es un objective.
@@ -89,8 +91,8 @@ namespace ReadSaveGames
                     }
                 }
 
-                //Si son datos de relleno sale del bucle.
-                if (DatosLeidos.ToString("X4").Equals("55555555"))
+                //Si son datos de relleno o se han hecho las 1700 iteraciones sale del bucle.
+                if (DatosLeidos.ToString("X4").Equals("55555555") || Contador == 1700)
                 {
                     break;
                 }
@@ -123,6 +125,10 @@ namespace ReadSaveGames
         //Cambiar las los números por las etiquetas.
         private void btn_convertir_Click(object sender, EventArgs e)
         {
+            rtbx_PartidaTexto.Clear();
+            ArchivoFinal.Clear();
+            ListaObjectives.Clear();
+
             string [] ObjectivesEncontradosSplit;
 
             if (File.Exists(RutaArchivosHashcodes))
@@ -153,7 +159,7 @@ namespace ReadSaveGames
             }
             else
             {
-                MessageBox.Show("No se ha encontrado el archivo \"hashcodes.h\".","Error",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("No se ha encontrado el archivo \"hashcodes.h\".","Error al leer",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
         }
 
@@ -209,19 +215,27 @@ namespace ReadSaveGames
 
                 TextWriter tw = new StreamWriter(sfd_save.FileName);
 
-                foreach (string s in ArchivoFinal)
+                try
                 {
-                    if (chbx_EuroLand.Checked)
+                    foreach (string s in ArchivoFinal)
                     {
-                        tw.WriteLine("setobjective " + s);
+                        if (chbx_EuroLand.Checked)
+                        {
+                            tw.WriteLine("setobjective " + s);
+                        }
+                        else
+                        {
+                            tw.WriteLine(s);
+                        }
                     }
-                    else
-                    {
-                        tw.WriteLine(s);
-                    }
-                }
 
-                tw.Close();
+                    tw.Close();
+                    MessageBox.Show("Archivo guardado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Se ha producido un error al guardar el archivo.", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

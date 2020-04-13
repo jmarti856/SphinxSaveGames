@@ -17,3 +17,4 @@ F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.GenerateR
 F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csproj.CoreCompileInputs.cache
 F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.exe
 F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.pdb
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Debug\ReadSaveGames.csprojAssemblyReference.cache
