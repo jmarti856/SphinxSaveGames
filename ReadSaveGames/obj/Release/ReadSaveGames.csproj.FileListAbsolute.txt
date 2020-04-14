@@ -1,0 +1,6 @@
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\bin\Release\Saved game reader.exe
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Release\ReadSaveGames.frm_Main.resources
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Release\SphinxSavedGameReader.Properties.Resources.resources
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Release\ReadSaveGames.csproj.GenerateResource.cache
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Release\ReadSaveGames.csproj.CoreCompileInputs.cache
+F:\Sphinx\SphinxSaveGames\ReadSaveGames\obj\Release\Saved game reader.exe

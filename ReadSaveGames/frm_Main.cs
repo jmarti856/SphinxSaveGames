@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ReadSaveGames
@@ -11,22 +12,30 @@ namespace ReadSaveGames
         public frm_Main()
         {
             InitializeComponent();
+
+            //Habilitar menú contextual a los richtextbox
+            rtbx_partidaBinario.EnableContextMenu();
+            rtbx_PartidaTexto.EnableContextMenu();
         }
 
-        //Lista donde se guardaran los objectives.
-        List<string> ListaObjectivesEncontrados = new List<string>();
-        List<string> ListaObjectives = new List<string>();
+        //Variables globales
+        List<string> ObjectivesEncontradosPartida = new List<string>();
+        List<string> InventarioEncontradoPartida = new List<string>();
+        List<string> ListaSeccionArchivoHashcodes = new List<string>();
         List<string> ArchivoFinal = new List<string>();
+       
         Stopwatch Cronometro = new Stopwatch();
-        string RutaArchivosHashcodes = Application.StartupPath + "//hashcodes.h";
+       
+        string RutaArchivoHashcodes;
+        string RutaGuardarTXT;
 
+        //Clases
+        CategoriasPartidaGuardada ClasseFunciones = new CategoriasPartidaGuardada();
+        FuncionesGenerales FuncionesGenerales = new FuncionesGenerales();
 
         //Mostrar los hashcodes encontrados en la partida guardada.
         private void btn_cargarArchivo_Click(object sender, EventArgs e)
         {
-            //Array para dividir el ID objective y valor.
-            string[] cadenaResultadoLeerPartida;
-
             //Abrir buscador archivos windows.
             if (ofd_partida.ShowDialog() == DialogResult.OK)
             {
@@ -35,209 +44,146 @@ namespace ReadSaveGames
 
                 //Vaciar la lista y el control del texto.
                 rtbx_partidaBinario.Clear();
-                ListaObjectivesEncontrados.Clear();
+                ObjectivesEncontradosPartida.Clear();
+                InventarioEncontradoPartida.Clear();
 
                 //Leer objectives y añadirlos a la lista.
-                LeerPartida();
-
-                //Mostrar resultados busqueda
-                foreach(string item in ListaObjectivesEncontrados)
-                {
-                    cadenaResultadoLeerPartida = item.Split(',');
-                    rtbx_partidaBinario.Text += "Hashcode: " + cadenaResultadoLeerPartida[0] + " Valor: " + cadenaResultadoLeerPartida[1] + Environment.NewLine;
-                }
+                Thread LecturaPartida = new Thread(LeerPartida);
+                LecturaPartida.Start();
             }
         }
 
         //Lee los objectives y los añade a la lista.
         public void LeerPartida()
         {
+            int cuenta;
             //Iniciar cronometro.
             Cronometro.Start();
 
-            //Crear lector.
-            BinaryReaderBigEndian Lector = new BinaryReaderBigEndian(new FileStream(txtb_rutaPartida.Text, FileMode.Open, FileAccess.Read));
-
-            //Variables importantes.
-            int NumeroObjectives, Contador = 0;
-            bool EsHashcode = false;
-            string NombreHashcode = "";
-
-            //Ir a la sección donde están los objectives.
-            Lector.BaseStream.Seek(unchecked((int)0xEC), SeekOrigin.Begin);
-
-            //Número de objectives que hay.
-            NumeroObjectives = checked((int)SwapBytes(Lector.ReadUInt32()));
-
-            //Buscar los objectives.
-            while (Contador < NumeroObjectives)
-            {
-                //Leer datos
-                uint DatosLeidos = SwapBytes(Lector.ReadUInt32());
-
-                //Comprobar si lo que ha leido es un objective.
-                if (DatosLeidos.ToString("X4").StartsWith("42"))
-                {
-                    EsHashcode = true;
-                    NombreHashcode = DatosLeidos.ToString("X4");
-                }
-                else
-                {
-                    //Si lo que había leido es un objective lo añade a la lista junto con su valor.
-                    if (EsHashcode)
-                    {
-                        ListaObjectivesEncontrados.Add(NombreHashcode + "," + int.Parse(DatosLeidos.ToString("X4"), System.Globalization.NumberStyles.HexNumber));
-                        EsHashcode = false;
-                    }
-                }
-
-                //Si son datos de relleno o se han hecho las 1700 iteraciones sale del bucle.
-                if (DatosLeidos.ToString("X4").Equals("55555555") || Contador == 1700)
-                {
-                    break;
-                }
-                else
-                {
-                    Contador++;
-                }
-            }
-
-            //Cerrar el lector.
-            Lector.Close();
+            //ObtenerListaObjectives
+            ObjectivesEncontradosPartida = ClasseFunciones.ObtenerListaObjectives(txtb_rutaPartida.Text);
+            InventarioEncontradoPartida = ClasseFunciones.ObtenerListaInventario(txtb_rutaPartida.Text);
 
             //Parar cronometro.
             Cronometro.Stop();
 
+            cuenta = ObjectivesEncontradosPartida.Count + InventarioEncontradoPartida.Count;
             //Mostrar numero de objectives.
-            rtbx_partidaBinario.Text += "Hashcodes encontrados: " + ListaObjectivesEncontrados.Count + Environment.NewLine;
-            rtbx_partidaBinario.Text += "Tiempo transcurrido: " + Cronometro.Elapsed.TotalSeconds.ToString() + "s" + Environment.NewLine;
-        }
+            rtbx_partidaBinario.Invoke((MethodInvoker)delegate
+            {
+                rtbx_partidaBinario.Text += "Hashcodes found: " + cuenta + Environment.NewLine;
+                rtbx_partidaBinario.Text += "Time elapsed: " + Cronometro.Elapsed.TotalSeconds.ToString() + "ms" + Environment.NewLine;
+            });
 
-        //Invertir el número.
-        public uint SwapBytes(uint x)
-        {
-            // swap adjacent 16-bit blocks
-            x = (x >> 16) | (x << 16);
-            // swap adjacent 8-bit blocks
-            return ((x & 0xFF00FF00) >> 8) | ((x & 0x00FF00FF) << 8);
+            //Mostrar resultados busqueda
+            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, ObjectivesEncontradosPartida, chbx_mostrarEtiquetas);
+            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, InventarioEncontradoPartida, chbx_mostrarEtiquetas);
         }
 
         //Cambiar las los números por las etiquetas.
         private void btn_convertir_Click(object sender, EventArgs e)
         {
+            //Limpiar los textbox y las listas.
             rtbx_PartidaTexto.Clear();
             ArchivoFinal.Clear();
-            ListaObjectives.Clear();
+            ListaSeccionArchivoHashcodes.Clear();
 
-            string [] ObjectivesEncontradosSplit;
+            Thread Etiquetar = new Thread(EtiquetarHashcodes);
+            Etiquetar.Start();
+        }
 
-            if (File.Exists(RutaArchivosHashcodes))
+        private void EtiquetarHashcodes()
+        {
+            //Asegurar que hay un archivo hashcode.h.
+            RutaArchivoHashcodes = FuncionesGenerales.ComprobarRutaArchivoHashcodes(chbx_hashcodesX);
+
+            //Comprobar si existe el archivo y etiquetar los hashcodes encontrados.
+            if (File.Exists(RutaArchivoHashcodes))
             {
                 //Iniciar cronometro.
                 Cronometro.Start();
 
-                AddObjectivesArchivoLista(RutaArchivosHashcodes);
-                foreach (string item in ListaObjectivesEncontrados)
-                {
-                    ObjectivesEncontradosSplit = item.Split(',');
-                    ObtenerEtiquetaHashcode("0x" + ObjectivesEncontradosSplit[0], ObjectivesEncontradosSplit[1]);
-                }
+                //Objectives
+                FuncionesGenerales.LeerSeccionArchivoHashcodes(RutaArchivoHashcodes, "HT_Objective_HASHCODE_BASE", "HT_Objective_HASHCODE_END", ListaSeccionArchivoHashcodes);
+                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, ObjectivesEncontradosPartida, ArchivoFinal);
+
+                //Inventario
+                FuncionesGenerales.LeerSeccionArchivoHashcodes(RutaArchivoHashcodes, "HT_Item_Pickup_BronzeScarab", "HT_Item_Object_HASHCODE_END", ListaSeccionArchivoHashcodes);
+                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, InventarioEncontradoPartida, ArchivoFinal);
 
                 //Parar cronometro.
                 Cronometro.Stop();
 
                 //Mostrar numero de objectives.
-                rtbx_PartidaTexto.Text += "Hashcodes convertidos: " + ArchivoFinal.Count + Environment.NewLine;
-                rtbx_PartidaTexto.Text += "Tiempo transcurrido: " + Cronometro.Elapsed.TotalSeconds.ToString() + "s" + Environment.NewLine;
-
-                //Mostrar resultados
-                foreach (string item in ArchivoFinal)
+                rtbx_PartidaTexto.Invoke((MethodInvoker)delegate
                 {
-                    rtbx_PartidaTexto.Text += item + Environment.NewLine;
-                }
+                    rtbx_PartidaTexto.Text += "Hashcodes tagged: " + ArchivoFinal.Count + Environment.NewLine;
+                    rtbx_PartidaTexto.Text += "Time elapsed: " + Cronometro.Elapsed.TotalSeconds.ToString() + "ms" + Environment.NewLine;
+                });
 
+                //Mostrar resultados.
+                FuncionesGenerales.ImprimirListaRichTextBox(rtbx_PartidaTexto, ArchivoFinal, chbx_mostrarEtiquetas);
             }
             else
             {
-                MessageBox.Show("No se ha encontrado el archivo \"hashcodes.h\".","Error al leer",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("File \"hashcodes.h\" not found.", "Error reading", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        public void ObtenerEtiquetaHashcode(string ID, string value)
+        private void btn_seleccionarRuta_Click(object sender, EventArgs e)
         {
-            string[] ListaObjectivesSplit;
-
-            foreach (string item in ListaObjectives)
+            if (sfd_save.ShowDialog() == DialogResult.OK)
             {
-                ListaObjectivesSplit = item.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                if (ListaObjectivesSplit[2].Equals(ID, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    ArchivoFinal.Add(ListaObjectivesSplit[1] + "     " + value);
-                }
-            }
-
-        }
-
-        public void AddObjectivesArchivoLista(string ruta)
-        {
-            string line;
-            bool read = false;
-            StreamReader reader = File.OpenText(ruta);
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                //Empezar a leer
-                if (line.Contains("HT_Objective_HASHCODE_BASE"))
-                {
-                    read = true;
-                }
-
-                //Añadir objectives a la lista
-                if (read)
-                {
-                    ListaObjectives.Add(line);
-                }
-
-                //Parar de leer y salir del bucle
-                if (line.Contains("HT_Objective_HASHCODE_END"))
-                {
-                    read = false;
-                    break;
-                }
+                RutaGuardarTXT = sfd_save.FileName;
+                txbx_guardar.Text = RutaGuardarTXT;
             }
         }
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {
-            if (sfd_save.ShowDialog() == DialogResult.OK)
+            if (Directory.Exists(Path.GetDirectoryName(RutaGuardarTXT)))
             {
-                txbx_guardar.Text = Path.GetFullPath(sfd_save.FileName);
-
-                TextWriter tw = new StreamWriter(sfd_save.FileName);
+                TextWriter tw = new StreamWriter(RutaGuardarTXT);
+                string [] cadenaDividida;
+                string prefix = "";
 
                 try
                 {
                     foreach (string s in ArchivoFinal)
                     {
+                        cadenaDividida = s.Split(',');
+                        if (cadenaDividida[0].StartsWith("HT_Objective"))
+                        {
+                            prefix = "SETOBJECTIVE ";
+                        }
+                        if (cadenaDividida[0].StartsWith("HT_Item"))
+                        {
+                            prefix = "INVENTORYSET ";
+                        }
+
                         if (chbx_EuroLand.Checked)
                         {
-                            tw.WriteLine("setobjective " + s);
+                            tw.WriteLine(prefix + cadenaDividida[0] + " " + cadenaDividida[1]);
                         }
                         else
                         {
-                            tw.WriteLine(s);
+                            tw.WriteLine(cadenaDividida[0] + " " + cadenaDividida[1]);
                         }
                     }
 
                     tw.Close();
-                    MessageBox.Show("Archivo guardado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    MessageBox.Show("File saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch
                 {
-                    MessageBox.Show("Se ha producido un error al guardar el archivo.", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An error occurred while writing the file.", "Error saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("The directory does not exist", "Error saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
     }
 }
