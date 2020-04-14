@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SphinxSavedGameReader
 {
@@ -47,6 +48,11 @@ namespace SphinxSavedGameReader
                 {
                     Etiqueta = item.Etiqueta;
                 }
+            }
+
+            if (String.IsNullOrEmpty(Etiqueta))
+            {
+                MessageBox.Show("The hashcode: \"" + valorHex + "\"has not found in hashcodes.h", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             return Etiqueta;
