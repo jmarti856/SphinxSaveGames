@@ -1,0 +1,8 @@
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\bin\Debug\Saved game reader.exe
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\bin\Debug\Saved game reader.pdb
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\SphinxSavedGameReader.frm_main.resources
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\SphinxSavedGameReader.Properties.Resources.resources
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\SphinxSavedGamesReader.csproj.GenerateResource.cache
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\SphinxSavedGamesReader.csproj.CoreCompileInputs.cache
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\Saved game reader.exe
+C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\Saved game reader.pdb
