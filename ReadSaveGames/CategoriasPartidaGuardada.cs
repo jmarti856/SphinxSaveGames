@@ -15,7 +15,7 @@ namespace ReadSaveGames
             //Crear lector.
             Lector = new BinaryReaderBigEndian(new FileStream(archivo, FileMode.Open, FileAccess.Read));
 
-            BuscadorPartida(Lector, ObjectivesEnLaPartida, 0xEC, "42");
+            BuscadorPartida(Lector, ObjectivesEnLaPartida, 0xEC, "42", false);
 
             //Cerrar el lector.
             Lector.Close();
@@ -31,8 +31,12 @@ namespace ReadSaveGames
             //Crear lector.
             Lector = new BinaryReaderBigEndian(new FileStream(archivo, FileMode.Open, FileAccess.Read));
 
-            BuscadorPartida(Lector, InventarioEnLaPartida, 0x3EF8, "40");
-            BuscadorPartida(Lector, InventarioEnLaPartida, 0x73BC, "40");
+            InventarioEnLaPartida.Add("/*------------[Sphinx Inventory]------------*/");
+            BuscadorPartida(Lector, InventarioEnLaPartida, 0x3630, "40", true);
+            BuscadorPartida(Lector, InventarioEnLaPartida, 0x3EF8, "40", true);
+            BuscadorPartida(Lector, InventarioEnLaPartida, 0x47C0, "40", true);
+            InventarioEnLaPartida.Add("/*------------[Mummy Inventory]------------*/");
+            BuscadorPartida(Lector, InventarioEnLaPartida, 0x73BC, "40", true);
 
             //Cerrar el lector.
             Lector.Close();
@@ -40,7 +44,7 @@ namespace ReadSaveGames
             return InventarioEnLaPartida;
         }
 
-        private void BuscadorPartida(BinaryReaderBigEndian Lector, List<string> ListaDatos, int num, string prefijo)
+        private void BuscadorPartida(BinaryReaderBigEndian Lector, List<string> ListaDatos, int num, string prefijo, bool items)
         {
             //Variables importantes.
             int NumeroInventario, Contador = 0;
@@ -63,7 +67,14 @@ namespace ReadSaveGames
                 {
                     if (DatosLeidos.ToString("X4").Length == 8)
                     {
-                        ListaDatos.Add(DatosLeidos.ToString("X4") + "," + int.Parse(SwapBytes(Lector.ReadUInt32()).ToString("X4"), System.Globalization.NumberStyles.HexNumber));
+                        if (items)
+                        {
+                            ListaDatos.Add(DatosLeidos.ToString("X4") + "," + int.Parse(SwapBytes(Lector.ReadUInt32()).ToString("X4"), System.Globalization.NumberStyles.HexNumber) + "," + int.Parse(SwapBytes(Lector.ReadUInt32()).ToString("X4"), System.Globalization.NumberStyles.HexNumber));
+                        }
+                        else
+                        {
+                            ListaDatos.Add(DatosLeidos.ToString("X4") + "," + int.Parse(SwapBytes(Lector.ReadUInt32()).ToString("X4"), System.Globalization.NumberStyles.HexNumber));
+                        }
                         Contador++;
                     }
                 }

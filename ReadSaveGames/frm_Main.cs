@@ -76,8 +76,8 @@ namespace ReadSaveGames
             });
 
             //Mostrar resultados busqueda
-            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, ObjectivesEncontradosPartida, chbx_mostrarEtiquetas);
-            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, InventarioEncontradoPartida, chbx_mostrarEtiquetas);
+            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, ObjectivesEncontradosPartida, chbx_mostrarEtiquetas, false);
+            FuncionesGenerales.ImprimirListaRichTextBox(rtbx_partidaBinario, InventarioEncontradoPartida, chbx_mostrarEtiquetas, true);
         }
 
         //Cambiar las los números por las etiquetas.
@@ -105,11 +105,11 @@ namespace ReadSaveGames
 
                 //Objectives
                 FuncionesGenerales.LeerSeccionArchivoHashcodes(RutaArchivoHashcodes, "HT_Objective_HASHCODE_BASE", "HT_Objective_HASHCODE_END", ListaSeccionArchivoHashcodes);
-                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, ObjectivesEncontradosPartida, ArchivoFinal);
+                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, ObjectivesEncontradosPartida, ArchivoFinal, false);
 
                 //Inventario
                 FuncionesGenerales.LeerSeccionArchivoHashcodes(RutaArchivoHashcodes, "HT_Item_Pickup_BronzeScarab", "HT_Item_Object_HASHCODE_END", ListaSeccionArchivoHashcodes);
-                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, InventarioEncontradoPartida, ArchivoFinal);
+                FuncionesGenerales.ObtenerEtiquetasHashcodes(RutaArchivoHashcodes, ListaSeccionArchivoHashcodes, InventarioEncontradoPartida, ArchivoFinal, true);
 
                 //Parar cronometro.
                 Cronometro.Stop();
@@ -122,7 +122,7 @@ namespace ReadSaveGames
                 });
 
                 //Mostrar resultados.
-                FuncionesGenerales.ImprimirListaRichTextBox(rtbx_PartidaTexto, ArchivoFinal, chbx_mostrarEtiquetas);
+                FuncionesGenerales.ImprimirListaRichTextBox(rtbx_PartidaTexto, ArchivoFinal, chbx_mostrarEtiquetas, true);
             }
             else
             {
@@ -151,23 +151,30 @@ namespace ReadSaveGames
                 {
                     foreach (string s in ArchivoFinal)
                     {
-                        cadenaDividida = s.Split(',');
-                        if (cadenaDividida[0].StartsWith("HT_Objective"))
+                        if (!s.StartsWith("/*"))
                         {
-                            prefix = "SETOBJECTIVE ";
-                        }
-                        if (cadenaDividida[0].StartsWith("HT_Item"))
-                        {
-                            prefix = "INVENTORYSET ";
-                        }
+                            cadenaDividida = s.Split(',');
+                            if (cadenaDividida[0].StartsWith("HT_Objective"))
+                            {
+                                prefix = "SETOBJECTIVE ";
+                            }
+                            if (cadenaDividida[0].StartsWith("HT_Item"))
+                            {
+                                prefix = "INVENTORYSET ";
+                            }
 
-                        if (chbx_EuroLand.Checked)
-                        {
-                            tw.WriteLine(prefix + cadenaDividida[0] + " " + cadenaDividida[1]);
+                            if (chbx_EuroLand.Checked)
+                            {
+                                tw.WriteLine(prefix + cadenaDividida[0] + " " + cadenaDividida[1]);
+                            }
+                            else
+                            {
+                                tw.WriteLine(cadenaDividida[0] + " " + cadenaDividida[1]);
+                            }
                         }
                         else
                         {
-                            tw.WriteLine(cadenaDividida[0] + " " + cadenaDividida[1]);
+                            tw.WriteLine(s);
                         }
                     }
 
