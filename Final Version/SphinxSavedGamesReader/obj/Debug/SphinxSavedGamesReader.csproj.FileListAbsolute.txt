@@ -8,7 +8,6 @@ C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\ob
 C:\Users\Jordi Martinez\Desktop\SphinxSavedGamesReader\SphinxSavedGamesReader\obj\Debug\Saved game reader.pdb
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\bin\Debug\Saved game reader.exe
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\bin\Debug\Saved game reader.pdb
-F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Debug\SphinxSavedGamesReader.csprojAssemblyReference.cache
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Debug\SphinxSavedGameReader.frm_main.resources
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Debug\SphinxSavedGameReader.Properties.Resources.resources
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Debug\SphinxSavedGamesReader.csproj.GenerateResource.cache

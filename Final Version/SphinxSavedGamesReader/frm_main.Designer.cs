@@ -218,7 +218,9 @@
             // 
             // sfd_guardarArchivoTxt
             // 
-            this.sfd_guardarArchivoTxt.FileName = "Save text file";
+            this.sfd_guardarArchivoTxt.DereferenceLinks = false;
+            this.sfd_guardarArchivoTxt.FileName = "hashcodes";
+            this.sfd_guardarArchivoTxt.Filter = "Documentos de texto|.txt|Todos los archivos|*.*";
             // 
             // frm_main
             // 
