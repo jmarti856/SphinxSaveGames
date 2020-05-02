@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,7 +7,7 @@ namespace SphinxSavedGameReader
 {
     class FuncionesEscritura
     {
-        public void EscribirArchivo(string Ruta, List<ArchivoTXT> ArchivoFinal, CheckBox FormatoGamescript)
+        public void EscribirArchivo(string Ruta, List<ArchivoTXT> ArchivoFinal, string[] Ankhs, CheckBox FormatoGamescript)
         {
             string Linea;
 
@@ -49,6 +50,10 @@ namespace SphinxSavedGameReader
                         }
                     }
                 }
+
+                Escritor.WriteLine("AnkhAdd HT_Item_Pickup_GoldAnkh " + (Int32.Parse(Ankhs[1]) - 3).ToString());
+                Escritor.WriteLine("AnkhAdd HT_Item_Pickup_BronzeAnkh " + Ankhs[0].ToString());
+
                 Escritor.Close();
 
                 MessageBox.Show("File saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -24,7 +24,7 @@ namespace SphinxSavedGameReader
         List<Hashcodes> HashcodesH = new List<Hashcodes>();
         List<ArchivoTXT> ArchivoFinal = new List<ArchivoTXT>();
 
-        //Clases según la categoría de la función.
+        //Clases:
         FuncionesLecturaPartida FuncionesL = new FuncionesLecturaPartida();
         FuncionesImpression FuncionesI = new FuncionesImpression();
         FuncionesGenericas FuncionesG = new FuncionesGenericas();
@@ -36,6 +36,8 @@ namespace SphinxSavedGameReader
 
         string RutaArchivoHashcodes;
         string RutaArchivoTXT;
+        string[] Ankhs;
+        bool ArchivoCorrecto;
 
         private void btn_cargarArchivo_Click(object sender, EventArgs e)
         {
@@ -50,9 +52,17 @@ namespace SphinxSavedGameReader
                 ObjectivesPartidaGuardada.Clear();
                 InventarioPartidaGuardada.Clear();
 
-                //Leer objectives y añadirlos a la lista.
-                Thread LecturaPartida = new Thread(LeerPartida);
-                LecturaPartida.Start();
+                ArchivoCorrecto = FuncionesL.ComprobarArchivo(txtb_rutaPartida.Text);
+                if (ArchivoCorrecto)
+                {
+                    //Leer objectives y añadirlos a la lista.
+                    Thread LecturaPartida = new Thread(LeerPartida);
+                    LecturaPartida.Start();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid file, select another file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -67,6 +77,7 @@ namespace SphinxSavedGameReader
             //ObtenerListaObjectives
             ObjectivesPartidaGuardada = FuncionesL.ObtenerObjectivesPartidaGuardada(0xEC, "42", txtb_rutaPartida.Text);
             InventarioPartidaGuardada = FuncionesL.ObtenerInventarioPartidaGuardada(txtb_rutaPartida.Text);
+            Ankhs = FuncionesL.LeerAnkhs(txtb_rutaPartida.Text);
 
             //Parar cronometro.
             Cronometro.Stop();
@@ -82,6 +93,7 @@ namespace SphinxSavedGameReader
             //Mostrar resultados busqueda
             FuncionesI.ImprimirListaObjectivesPartidaGuardada(rtbx_partidaBinario, ObjectivesPartidaGuardada, chbx_mostrarEtiquetas);
             FuncionesI.ImprimirListaInventarioPartidaGuardada(rtbx_partidaBinario, InventarioPartidaGuardada, chbx_mostrarEtiquetas);
+            FuncionesI.ImprimirAnkhs(rtbx_partidaBinario, Ankhs, chbx_mostrarEtiquetas);
         }
 
         private void btn_convertir_Click(object sender, EventArgs e)
@@ -126,6 +138,7 @@ namespace SphinxSavedGameReader
 
                 //Imprimir Resultado final
                 FuncionesI.ImprimirArchivoFinal(rtbx_PartidaTexto, ArchivoFinal, chbx_mostrarEtiquetas);
+                FuncionesI.ImprimirAnkhs(rtbx_PartidaTexto, Ankhs, chbx_mostrarEtiquetas);
             }
             else
             {
@@ -148,7 +161,7 @@ namespace SphinxSavedGameReader
             if (Directory.Exists(Path.GetDirectoryName(RutaArchivoTXT)))
             {
                 //Escribir archivo Txt con la configuración adequada. 
-                FuncionesE.EscribirArchivo(RutaArchivoTXT, ArchivoFinal, chbx_EuroLand);
+                FuncionesE.EscribirArchivo(RutaArchivoTXT, ArchivoFinal, Ankhs, chbx_EuroLand);
             }
             else
             {

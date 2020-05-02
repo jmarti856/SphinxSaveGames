@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace SphinxSavedGameReader
 {
@@ -108,6 +109,59 @@ namespace SphinxSavedGameReader
             Lector.Close();
 
             return ListaInventario;
+        }
+
+        public string [] LeerAnkhs(string RtuaPartidaGuardada)
+        {
+            string [] Ankhs = new string[2];
+
+            //Crear lector
+            Lector = new BinaryReaderBigEndian(new FileStream(RtuaPartidaGuardada, FileMode.Open, FileAccess.Read));
+
+            //Numero de ankhs
+            Lector.BaseStream.Seek(unchecked((int)0x3610), SeekOrigin.Begin);
+            Ankhs[0] = checked((int)SwapBytes(Lector.ReadUInt32())).ToString();
+
+            //Número total de ankhs
+            Lector.BaseStream.Seek(unchecked((int)0x3614), SeekOrigin.Begin);
+            Ankhs[1] = (checked((int)SwapBytes(Lector.ReadUInt32())) / 3).ToString();
+
+            return Ankhs;
+        }
+
+        public bool ComprobarArchivo(string RtuaPartidaGuardada)
+        {
+            bool correcto;
+            StringBuilder TextCheck = new StringBuilder();
+
+            //Crear lector
+            Lector = new BinaryReaderBigEndian(new FileStream(RtuaPartidaGuardada, FileMode.Open, FileAccess.Read));
+
+            //Comprobar el primer byte
+            if (Lector.Read().ToString().Equals("4"))
+            {
+                Lector.BaseStream.Seek(unchecked((int)0x12), SeekOrigin.Begin);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    TextCheck.Append(Lector.ReadChar());
+                }
+
+                if (TextCheck.ToString().Equals("SPHINX"))
+                {
+                    correcto = true;
+                }
+                else
+                {
+                    correcto = false;
+                }
+            }
+            else
+            {
+                correcto = false;
+            }
+
+            return correcto;
         }
 
         //Invertir el número.

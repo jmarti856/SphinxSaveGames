@@ -73,5 +73,25 @@ namespace SphinxSavedGameReader
                 });
             }
         }
+
+        public void ImprimirAnkhs(RichTextBox textbox, string[] ankhs, CheckBox MostarEtiquetas)
+        {
+            if (ankhs != null)
+            {
+                textbox.Invoke((MethodInvoker)delegate
+                {
+                    if (MostarEtiquetas.Checked)
+                    {
+                        textbox.Text += "HT_Item_Pickup_GoldAnkh " + ankhs[0] + Environment.NewLine;
+                        textbox.Text += "HT_Item_Pickup_BronzeAnkh " + ankhs[1] + Environment.NewLine;
+                    }
+                    else
+                    {
+                        textbox.Text += ankhs[0] + Environment.NewLine;
+                        textbox.Text += ankhs[1] + Environment.NewLine;
+                    }
+                });
+            }
+        }
     }
 }
