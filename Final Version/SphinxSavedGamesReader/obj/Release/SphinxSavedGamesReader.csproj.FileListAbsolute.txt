@@ -4,3 +4,4 @@ F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Release\Sphin
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Release\SphinxSavedGamesReader.csproj.GenerateResource.cache
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Release\SphinxSavedGamesReader.csproj.CoreCompileInputs.cache
 F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Release\Saved game reader.exe
+F:\Sphinx\SphinxSaveGames\Final Version\SphinxSavedGamesReader\obj\Release\SphinxSavedGamesReader.csprojAssemblyReference.cache

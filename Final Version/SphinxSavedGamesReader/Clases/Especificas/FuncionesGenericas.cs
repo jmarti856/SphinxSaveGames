@@ -7,11 +7,18 @@ namespace SphinxSavedGameReader
     {
         public string ComprobarRutaArchivoHashcodes(CheckBox chbx_hashcodesX)
         {
-            string ruta;
+            string ruta = "";
 
             if (chbx_hashcodesX.Checked)
             {
-                ruta = @"S:\Sphinx\Project\hashcodes.h";
+                if (File.Exists(@"S:\Sphinx\Project\hashcodes.h"))
+                {
+                    ruta = @"S:\Sphinx\Project\hashcodes.h";
+                }
+                else
+                {
+                    MessageBox.Show("File \"S:\\Sphinx\\Project\\hashcodes.h\" not found. Select a hashcodes file.", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -21,8 +28,7 @@ namespace SphinxSavedGameReader
                 }
                 else
                 {
-                    MessageBox.Show("File not found, \"S:\\Sphinx\\Project\\hashcodes.h\" file will be used.");
-                    ruta = @"S:\Sphinx\Project\hashcodes.h";
+                    MessageBox.Show("Hashcodes file not found", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 

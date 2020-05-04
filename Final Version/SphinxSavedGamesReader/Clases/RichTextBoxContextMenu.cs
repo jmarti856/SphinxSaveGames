@@ -7,8 +7,10 @@ public static class RichTextBoxContextMenu
         if (rtb.ContextMenuStrip == null)
         {
             // Create a ContextMenuStrip without icons
-            ContextMenuStrip cms = new ContextMenuStrip();
-            cms.ShowImageMargin = false;
+            ContextMenuStrip cms = new ContextMenuStrip
+            {
+                ShowImageMargin = false
+            };
 
             // 1. Add the Undo option
             ToolStripMenuItem tsmiUndo = new ToolStripMenuItem("Undo");

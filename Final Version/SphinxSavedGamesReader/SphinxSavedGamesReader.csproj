@@ -56,11 +56,11 @@
     <Compile Include="Clases\Datos\InventoryItems.cs" />
     <Compile Include="Clases\Datos\Objectives.cs" />
     <Compile Include="Clases\Especificas\FuncionesEscritura.cs" />
-    <Compile Include="frm_main.cs">
+    <Compile Include="Frm_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_main.Designer.cs">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <Compile Include="Frm_Main.Designer.cs">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Especificas\FuncionesConversion.cs" />
     <Compile Include="Clases\Especificas\FuncionesGenericas.cs" />
@@ -70,8 +70,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clases\RichTextBoxContextMenu.cs" />
-    <EmbeddedResource Include="frm_main.resx">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Main.resx">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

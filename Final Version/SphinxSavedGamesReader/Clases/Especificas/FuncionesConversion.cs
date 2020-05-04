@@ -47,6 +47,7 @@ namespace SphinxSavedGameReader
                 if (item.ValorHex.Equals(valorHex, StringComparison.OrdinalIgnoreCase))
                 {
                     Etiqueta = item.Etiqueta;
+                    break;
                 }
             }
 

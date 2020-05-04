@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace SphinxSavedGameReader
 {
-    public partial class frm_main : Form
+    public partial class Frm_Main : Form
     {
-        public frm_main()
+        public Frm_Main()
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace SphinxSavedGameReader
         string[] Ankhs;
         bool ArchivoCorrecto;
 
-        private void btn_cargarArchivo_Click(object sender, EventArgs e)
+        private void Btn_cargarArchivo_Click(object sender, EventArgs e)
         {
             //Abrir buscador archivos windows.
             if (opfd_abrirPartidaGuardada.ShowDialog() == DialogResult.OK)
@@ -69,7 +69,7 @@ namespace SphinxSavedGameReader
         //Lee los objectives y los añade a la lista.
         public void LeerPartida()
         {
-            int totalObjectives;
+            int TotalObjectives;
 
             //Iniciar cronometro.
             Cronometro.Start();
@@ -82,11 +82,12 @@ namespace SphinxSavedGameReader
             //Parar cronometro.
             Cronometro.Stop();
 
-            totalObjectives = ObjectivesPartidaGuardada.Count + InventarioPartidaGuardada.Count;
+            TotalObjectives = ObjectivesPartidaGuardada.Count + InventarioPartidaGuardada.Count + Ankhs.Length;
+
             //Mostrar numero de objectives.
             rtbx_partidaBinario.Invoke((MethodInvoker)delegate
             {
-                rtbx_partidaBinario.Text += "Hashcodes found: " + totalObjectives + Environment.NewLine;
+                rtbx_partidaBinario.Text += "Hashcodes found: " + TotalObjectives + Environment.NewLine;
                 rtbx_partidaBinario.Text += "Time elapsed: " + Cronometro.Elapsed.TotalSeconds.ToString() + "ms" + Environment.NewLine;
             });
 
@@ -96,7 +97,7 @@ namespace SphinxSavedGameReader
             FuncionesI.ImprimirAnkhs(rtbx_partidaBinario, Ankhs, chbx_mostrarEtiquetas);
         }
 
-        private void btn_convertir_Click(object sender, EventArgs e)
+        private void Btn_convertir_Click(object sender, EventArgs e)
         {
             //Limpiar los textbox y las listas.
             rtbx_PartidaTexto.Clear();
@@ -132,7 +133,7 @@ namespace SphinxSavedGameReader
                 //Mostrar numero de objectives.
                 rtbx_PartidaTexto.Invoke((MethodInvoker)delegate
                 {
-                    rtbx_PartidaTexto.Text += "Hashcodes tagged: " + ArchivoFinal.Count + Environment.NewLine;
+                    rtbx_PartidaTexto.Text += "Hashcodes tagged: " + (ArchivoFinal.Count + 2) + Environment.NewLine;
                     rtbx_PartidaTexto.Text += "Time elapsed: " + Cronometro.Elapsed.TotalSeconds.ToString() + "ms" + Environment.NewLine;
                 });
 
@@ -142,11 +143,11 @@ namespace SphinxSavedGameReader
             }
             else
             {
-                MessageBox.Show("File \"hashcodes.h\" not found.", "Error reading", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("File \"hashcodes.h\" not found.", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        private void btn_seleccionarRuta_Click(object sender, EventArgs e)
+        private void Btn_seleccionarRuta_Click(object sender, EventArgs e)
         {
             if (sfd_guardarArchivoTxt.ShowDialog() == DialogResult.OK)
             {
@@ -155,7 +156,7 @@ namespace SphinxSavedGameReader
             }
         }
 
-        private void btn_guardar_Click(object sender, EventArgs e)
+        private void Btn_guardar_Click(object sender, EventArgs e)
         {
             //Si el directorio existe escribir el txt.
             if (Directory.Exists(Path.GetDirectoryName(RutaArchivoTXT)))

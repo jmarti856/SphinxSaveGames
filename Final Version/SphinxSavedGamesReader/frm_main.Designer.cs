@@ -1,6 +1,6 @@
 ﻿namespace SphinxSavedGameReader
 {
-    partial class frm_main
+    partial class Frm_Main
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
             this.chbx_mostrarEtiquetas = new System.Windows.Forms.CheckBox();
             this.chbx_hashcodesX = new System.Windows.Forms.CheckBox();
             this.btn_seleccionarRuta = new System.Windows.Forms.Button();
@@ -86,7 +86,7 @@
             this.btn_seleccionarRuta.TabIndex = 21;
             this.btn_seleccionarRuta.Text = "...";
             this.btn_seleccionarRuta.UseVisualStyleBackColor = true;
-            this.btn_seleccionarRuta.Click += new System.EventHandler(this.btn_seleccionarRuta_Click);
+            this.btn_seleccionarRuta.Click += new System.EventHandler(this.Btn_seleccionarRuta_Click);
             // 
             // chbx_EuroLand
             // 
@@ -108,7 +108,7 @@
             this.btn_convertir.TabIndex = 19;
             this.btn_convertir.Text = "Label";
             this.btn_convertir.UseVisualStyleBackColor = true;
-            this.btn_convertir.Click += new System.EventHandler(this.btn_convertir_Click);
+            this.btn_convertir.Click += new System.EventHandler(this.Btn_convertir_Click);
             // 
             // btn_guardar
             // 
@@ -119,7 +119,7 @@
             this.btn_guardar.TabIndex = 18;
             this.btn_guardar.Text = "Save";
             this.btn_guardar.UseVisualStyleBackColor = true;
-            this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
+            this.btn_guardar.Click += new System.EventHandler(this.Btn_guardar_Click);
             // 
             // txbx_guardar
             // 
@@ -191,7 +191,7 @@
             this.btn_cargarArchivo.TabIndex = 14;
             this.btn_cargarArchivo.Text = "Open";
             this.btn_cargarArchivo.UseVisualStyleBackColor = true;
-            this.btn_cargarArchivo.Click += new System.EventHandler(this.btn_cargarArchivo_Click);
+            this.btn_cargarArchivo.Click += new System.EventHandler(this.Btn_cargarArchivo_Click);
             // 
             // txtb_rutaPartida
             // 

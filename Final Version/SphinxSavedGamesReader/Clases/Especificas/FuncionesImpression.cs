@@ -14,7 +14,7 @@ namespace SphinxSavedGameReader
                 {
                     if (MostarEtiquetas.Checked)
                     {
-                        textbox.Text += "Hashcode: " + item.ObjectiveNumHex + " Valor: " + item.ValorObjective + Environment.NewLine;
+                        textbox.Text += "Hashcode: " + item.ObjectiveNumHex + " Value: " + item.ValorObjective + Environment.NewLine;
                     }
                     else
                     {
@@ -82,13 +82,13 @@ namespace SphinxSavedGameReader
                 {
                     if (MostarEtiquetas.Checked)
                     {
-                        textbox.Text += "HT_Item_Pickup_GoldAnkh " + ankhs[0] + Environment.NewLine;
-                        textbox.Text += "HT_Item_Pickup_BronzeAnkh " + ankhs[1] + Environment.NewLine;
+                        textbox.Text += "Hashcode: HT_Item_Pickup_GoldAnkh Value: " + ankhs[0] + Environment.NewLine;
+                        textbox.Text += "Hashcode: HT_Item_Pickup_BronzeAnkh Value: " + ankhs[1] + Environment.NewLine;
                     }
                     else
                     {
-                        textbox.Text += ankhs[0] + Environment.NewLine;
-                        textbox.Text += ankhs[1] + Environment.NewLine;
+                        textbox.Text += "HT_Item_Pickup_GoldAnkh " + ankhs[0] + Environment.NewLine;
+                        textbox.Text += "HT_Item_Pickup_BronzeAnkh " + ankhs[1] + Environment.NewLine;
                     }
                 });
             }
